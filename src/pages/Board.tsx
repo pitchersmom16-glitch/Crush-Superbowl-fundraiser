@@ -105,11 +105,13 @@ export function Board() {
       const patriotsDigit = patriotsScore % 10;
       const seahawksDigit = seahawksScore % 10;
 
-      const patriotsIndex = boardConfig.chiefs_numbers.indexOf(patriotsDigit);
-      const seahawksIndex = boardConfig.eagles_numbers.indexOf(seahawksDigit);
+      // Seahawks = TOP (columns) = chiefs_numbers
+      // Patriots = LEFT (rows) = eagles_numbers
+      const seahawksIndex = boardConfig.chiefs_numbers.indexOf(seahawksDigit);
+      const patriotsIndex = boardConfig.eagles_numbers.indexOf(patriotsDigit);
 
       if (patriotsIndex !== -1 && seahawksIndex !== -1) {
-        const position = seahawksIndex * 10 + patriotsIndex;
+        const position = patriotsIndex * 10 + seahawksIndex;
         winners.add(position);
       }
     };
@@ -173,11 +175,13 @@ export function Board() {
     const patriotsDigit = parseInt(patriotsScore) % 10;
     const seahawksDigit = parseInt(seahawksScore) % 10;
 
-    const patriotsIndex = boardConfig.chiefs_numbers.indexOf(patriotsDigit);
-    const seahawksIndex = boardConfig.eagles_numbers.indexOf(seahawksDigit);
+    // Seahawks = TOP (columns) = chiefs_numbers
+    // Patriots = LEFT (rows) = eagles_numbers
+    const seahawksIndex = boardConfig.chiefs_numbers.indexOf(seahawksDigit);
+    const patriotsIndex = boardConfig.eagles_numbers.indexOf(patriotsDigit);
 
     if (patriotsIndex !== -1 && seahawksIndex !== -1) {
-      const position = seahawksIndex * 10 + patriotsIndex;
+      const position = patriotsIndex * 10 + seahawksIndex;
       const winningSquare = squares.find(s => s.position === position);
       
       if (winningSquare?.buyer_name) {
@@ -230,7 +234,7 @@ export function Board() {
                 <h3 className="font-bold text-blue-900">How It Works:</h3>
                 <ol className="list-decimal list-inside space-y-1 ml-2">
                   <li><strong>Step 1:</strong> Buy a square - Enter your name, email, and Venmo</li>
-                  <li><strong>Step 2:</strong> Once all 100 squares are sold, numbers 0-9 are randomly assigned to each row (Seahawks) and column (Patriots)</li>
+                  <li><strong>Step 2:</strong> Once all 100 squares are sold, numbers 0-9 are randomly assigned to each row (Patriots) and column (Seahawks)</li>
                   <li><strong>Step 3:</strong> During the game, after each quarter, we check the score</li>
                   <li><strong>Step 4:</strong> Match the LAST DIGIT of each team's score to find the winning square</li>
                 </ol>
@@ -351,13 +355,14 @@ export function Board() {
         )}
 
         <div className="bg-white rounded-lg p-4 shadow-lg overflow-x-auto">
+          {/* TOP HEADER: Seattle Seahawks (columns) - GREEN */}
           <div className="grid grid-cols-11 gap-1 mb-1">
-            <div className="bg-blue-700 text-white font-bold p-2 text-center rounded">
-              Patriots
+            <div className="bg-green-600 text-white font-bold p-2 text-center rounded text-xs">
+              Seattle Seahawks
             </div>
             {boardConfig?.numbers_assigned && boardConfig.chiefs_numbers ? (
               boardConfig.chiefs_numbers.map((num, idx) => (
-                <div key={idx} className="bg-blue-100 text-blue-800 font-bold p-2 text-center rounded">
+                <div key={idx} className="bg-green-100 text-green-800 font-bold p-2 text-center rounded">
                   {num}
                 </div>
               ))
@@ -370,21 +375,18 @@ export function Board() {
             )}
           </div>
 
+          {/* LEFT HEADER: New England Patriots (rows) - BLUE */}
           {Array.from({ length: 10 }).map((_, rowIdx) => (
             <div key={rowIdx} className="grid grid-cols-11 gap-1 mb-1">
-              {rowIdx === 0 ? (
-                <div className="bg-green-600 text-white font-bold p-2 text-center rounded row-span-1">
-                  Seahawks
-                </div>
-              ) : rowIdx === 1 && boardConfig?.numbers_assigned && boardConfig.eagles_numbers ? (
-                <div className="bg-green-100 text-green-800 font-bold p-2 text-center rounded">
+              {boardConfig?.numbers_assigned && boardConfig.eagles_numbers ? (
+                <div className="bg-blue-100 text-blue-800 font-bold p-2 text-center rounded">
                   {boardConfig.eagles_numbers[rowIdx]}
                 </div>
-              ) : boardConfig?.numbers_assigned && boardConfig.eagles_numbers ? (
-                <div className="bg-green-100 text-green-800 font-bold p-2 text-center rounded">
-                  {boardConfig.eagles_numbers[rowIdx]}
+              ) : rowIdx === 0 ? (
+                <div className="bg-blue-800 text-white font-bold p-2 text-center rounded text-xs">
+                  NE Patriots
                 </div>
-              ) : rowIdx === 0 ? null : (
+              ) : (
                 <div className="bg-gray-200 p-2 text-center rounded text-gray-500">
                   ?
                 </div>

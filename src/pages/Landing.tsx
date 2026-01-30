@@ -31,7 +31,7 @@ export function Landing() {
             <ol className="list-decimal list-inside space-y-3 text-gray-700">
               <li><strong>Claim a square</strong> — Click &quot;Buy Squares&quot; below, pick an available square, and enter your name, email, and phone.</li>
               <li><strong>Pay $20</strong> — Venmo <strong>@WCCRUSH2014</strong> with your name in the note.</li>
-              <li><strong>Numbers are randomized</strong> — After all 100 squares are claimed, we randomly assign 0–9 to Patriots (columns) and Seahawks (rows).</li>
+              <li><strong>Numbers are randomized</strong> — After all 100 squares are claimed, we randomly assign 0–9 to Seahawks (columns) and Patriots (rows).</li>
               <li><strong>Win each quarter</strong> — The last digit of each team&apos;s score (e.g. Patriots 17, Seahawks 13 → 7 and 3) finds the winning square. Payouts: <strong>Q1 $200</strong>, <strong>Q2 $200</strong>, <strong>Q3 $200</strong>, <strong>Final $300</strong>.</li>
             </ol>
           </div>
@@ -59,7 +59,7 @@ export function Landing() {
                 <li><strong>Q3:</strong> $200</li>
                 <li><strong>Final:</strong> $300</li>
               </ul>
-              <p className="text-sm text-gray-600 mt-2">Patriots = columns (top). Seahawks = rows (left).</p>
+              <p className="text-sm text-gray-600 mt-2">Seahawks = columns (top). Patriots = rows (left).</p>
             </div>
           </div>
 
