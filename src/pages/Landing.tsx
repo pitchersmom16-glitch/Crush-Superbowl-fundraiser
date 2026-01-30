@@ -17,12 +17,23 @@ export function Landing() {
               Super Bowl Squares
             </h2>
             <p className="text-xl md:text-2xl mb-2">
-              Chiefs vs Eagles
+              Patriots vs Seahawks
             </p>
             <p className="text-lg flex items-center justify-center gap-2">
               <Calendar size={20} />
               February 9, 2025
             </p>
+          </div>
+
+          {/* Instructions - How the game works */}
+          <div className="bg-white rounded-lg p-8 shadow-xl mb-8">
+            <h3 className="text-2xl font-bold mb-4">How It Works</h3>
+            <ol className="list-decimal list-inside space-y-3 text-gray-700">
+              <li><strong>Claim a square</strong> — Click &quot;Buy Squares&quot; below, pick an available square, and enter your name, email, and phone.</li>
+              <li><strong>Pay $20</strong> — Venmo <strong>@WCCRUSH2014</strong> with your name in the note.</li>
+              <li><strong>Numbers are randomized</strong> — After all 100 squares are claimed, we randomly assign 0–9 to Patriots (columns) and Seahawks (rows).</li>
+              <li><strong>Win each quarter</strong> — The last digit of each team&apos;s score (e.g. Patriots 17, Seahawks 13 → 7 and 3) finds the winning square. Payouts: <strong>Q1 $200</strong>, <strong>Q2 $200</strong>, <strong>Q3 $200</strong>, <strong>Final $300</strong>.</li>
+            </ol>
           </div>
 
           {/* Info Cards */}
@@ -48,19 +59,8 @@ export function Landing() {
                 <li><strong>Q3:</strong> $200</li>
                 <li><strong>Final:</strong> $300</li>
               </ul>
+              <p className="text-sm text-gray-600 mt-2">Patriots = columns (top). Seahawks = rows (left).</p>
             </div>
-          </div>
-
-          {/* How It Works */}
-          <div className="bg-white rounded-lg p-8 shadow-xl mb-8">
-            <h3 className="text-2xl font-bold mb-4">How It Works</h3>
-            <ol className="list-decimal list-inside space-y-3 text-gray-700">
-              <li>Click "Buy Squares" below to see the board</li>
-              <li>Choose an available square (gray) and claim it</li>
-              <li>Pay $20 via Venmo to @WCCRUSH2014</li>
-              <li>Numbers will be randomly assigned before the game</li>
-              <li>Win based on the last digit of each team's score!</li>
-            </ol>
           </div>
 
           {/* CTA Button */}

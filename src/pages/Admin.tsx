@@ -190,7 +190,7 @@ export function Admin() {
           <h2 className="text-xl font-bold mb-4">Update Scores</h2>
           <form onSubmit={updateScores} className="grid md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">Q1 Chiefs Score</label>
+              <label className="block text-sm font-medium mb-1">Q1 Patriots Score</label>
               <input
                 type="number"
                 value={scores.q1_chiefs}
@@ -199,7 +199,7 @@ export function Admin() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Q1 Eagles Score</label>
+              <label className="block text-sm font-medium mb-1">Q1 Seahawks Score</label>
               <input
                 type="number"
                 value={scores.q1_eagles}
@@ -208,7 +208,7 @@ export function Admin() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Q2 Chiefs Score</label>
+              <label className="block text-sm font-medium mb-1">Q2 Patriots Score</label>
               <input
                 type="number"
                 value={scores.q2_chiefs}
@@ -217,7 +217,7 @@ export function Admin() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Q2 Eagles Score</label>
+              <label className="block text-sm font-medium mb-1">Q2 Seahawks Score</label>
               <input
                 type="number"
                 value={scores.q2_eagles}
@@ -226,7 +226,7 @@ export function Admin() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Q3 Chiefs Score</label>
+              <label className="block text-sm font-medium mb-1">Q3 Patriots Score</label>
               <input
                 type="number"
                 value={scores.q3_chiefs}
@@ -235,7 +235,7 @@ export function Admin() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Q3 Eagles Score</label>
+              <label className="block text-sm font-medium mb-1">Q3 Seahawks Score</label>
               <input
                 type="number"
                 value={scores.q3_eagles}
@@ -244,7 +244,7 @@ export function Admin() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Final Chiefs Score</label>
+              <label className="block text-sm font-medium mb-1">Final Patriots Score</label>
               <input
                 type="number"
                 value={scores.final_chiefs}
@@ -253,7 +253,7 @@ export function Admin() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Final Eagles Score</label>
+              <label className="block text-sm font-medium mb-1">Final Seahawks Score</label>
               <input
                 type="number"
                 value={scores.final_eagles}

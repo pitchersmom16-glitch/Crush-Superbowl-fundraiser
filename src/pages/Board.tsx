@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import { Home, ChevronDown } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import type { Square as SquareType, BoardConfig } from '../types/index';
 import { Square } from '../components/Square';
@@ -15,14 +15,14 @@ export function Board() {
   const [selectedSquare, setSelectedSquare] = useState<number | null>(null);
   const [viewingSquare, setViewingSquare] = useState<SquareType | null>(null);
   const [currentQuarter, setCurrentQuarter] = useState<'Q1' | 'Q2' | 'Q3' | 'FINAL'>('Q1');
-  const [chiefsScore, setChiefsScore] = useState('');
-  const [eaglesScore, setEaglesScore] = useState('');
+  const [patriotsScore, setPatriotsScore] = useState('');
+  const [seahawksScore, setSeahawksScore] = useState('');
   const [winnerMessage, setWinnerMessage] = useState('');
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const loadData = async () => {
     setLoading(true);
     try {
-      // Load squares
       const { data: squaresData, error: squaresError } = await supabase
         .from('squares')
         .select('*')
@@ -30,7 +30,6 @@ export function Board() {
 
       if (squaresError) throw squaresError;
 
-      // If no squares exist, create them
       if (!squaresData || squaresData.length === 0) {
         const newSquares = Array.from({ length: 100 }, (_, i) => ({
           position: i,
@@ -47,7 +46,6 @@ export function Board() {
 
         if (insertError) throw insertError;
 
-        // Reload squares
         const { data: reloadedSquares } = await supabase
           .from('squares')
           .select('*')
@@ -58,7 +56,6 @@ export function Board() {
         setSquares(squaresData);
       }
 
-      // Load board config
       const { data: configData, error: configError } = await supabase
         .from('board_config')
         .select('*')
@@ -77,7 +74,6 @@ export function Board() {
   useEffect(() => {
     loadData();
 
-    // Subscribe to real-time updates
     const squaresSubscription = supabase
       .channel('squares-changes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'squares' }, () => {
@@ -102,18 +98,18 @@ export function Board() {
     if (!boardConfig?.numbers_assigned) return new Set();
     const winners = new Set<number>();
 
-    const checkWinner = (chiefsScore: number | null, eaglesScore: number | null) => {
-      if (chiefsScore === null || eaglesScore === null) return;
+    const checkWinner = (patriotsScore: number | null, seahawksScore: number | null) => {
+      if (patriotsScore === null || seahawksScore === null) return;
       if (!boardConfig.chiefs_numbers || !boardConfig.eagles_numbers) return;
 
-      const chiefsDigit = chiefsScore % 10;
-      const eaglesDigit = eaglesScore % 10;
+      const patriotsDigit = patriotsScore % 10;
+      const seahawksDigit = seahawksScore % 10;
 
-      const chiefsIndex = boardConfig.chiefs_numbers.indexOf(chiefsDigit);
-      const eaglesIndex = boardConfig.eagles_numbers.indexOf(eaglesDigit);
+      const patriotsIndex = boardConfig.chiefs_numbers.indexOf(patriotsDigit);
+      const seahawksIndex = boardConfig.eagles_numbers.indexOf(seahawksDigit);
 
-      if (chiefsIndex !== -1 && eaglesIndex !== -1) {
-        const position = eaglesIndex * 10 + chiefsIndex;
+      if (patriotsIndex !== -1 && seahawksIndex !== -1) {
+        const position = seahawksIndex * 10 + patriotsIndex;
         winners.add(position);
       }
     };
@@ -165,7 +161,7 @@ export function Board() {
   };
 
   const handleCheckWinner = () => {
-    if (!chiefsScore || !eaglesScore) {
+    if (!patriotsScore || !seahawksScore) {
       alert('Please enter both scores');
       return;
     }
@@ -174,14 +170,14 @@ export function Board() {
       return;
     }
 
-    const chiefsDigit = parseInt(chiefsScore) % 10;
-    const eaglesDigit = parseInt(eaglesScore) % 10;
+    const patriotsDigit = parseInt(patriotsScore) % 10;
+    const seahawksDigit = parseInt(seahawksScore) % 10;
 
-    const chiefsIndex = boardConfig.chiefs_numbers.indexOf(chiefsDigit);
-    const eaglesIndex = boardConfig.eagles_numbers.indexOf(eaglesDigit);
+    const patriotsIndex = boardConfig.chiefs_numbers.indexOf(patriotsDigit);
+    const seahawksIndex = boardConfig.eagles_numbers.indexOf(seahawksDigit);
 
-    if (chiefsIndex !== -1 && eaglesIndex !== -1) {
-      const position = eaglesIndex * 10 + chiefsIndex;
+    if (patriotsIndex !== -1 && seahawksIndex !== -1) {
+      const position = seahawksIndex * 10 + patriotsIndex;
       const winningSquare = squares.find(s => s.position === position);
       
       if (winningSquare?.buyer_name) {
@@ -203,7 +199,6 @@ export function Board() {
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="container mx-auto max-w-6xl">
-        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <button
             onClick={() => navigate('/')}
@@ -215,7 +210,57 @@ export function Board() {
           <h1 className="text-3xl font-bold">Super Bowl Squares</h1>
         </div>
 
-        {/* Game Status Banner */}
+        <div className="mb-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
+          <button
+            onClick={() => setShowInstructions(!showInstructions)}
+            className="flex items-center gap-2 w-full text-left font-bold text-lg text-blue-800 hover:text-blue-600"
+          >
+            <ChevronDown size={24} className={`transition-transform ${showInstructions ? 'rotate-180' : ''}`} />
+            📋 How to Play - Super Bowl Squares
+          </button>
+          
+          {showInstructions && (
+            <div className="mt-4 space-y-3 text-gray-700">
+              <div>
+                <h3 className="font-bold text-blue-900">What is Super Bowl Squares?</h3>
+                <p>A 10×10 grid with 100 squares. Each square costs $20 and funds the West Cobb Crush 2014 Haney/Woodman Softball Team.</p>
+              </div>
+              
+              <div>
+                <h3 className="font-bold text-blue-900">How It Works:</h3>
+                <ol className="list-decimal list-inside space-y-1 ml-2">
+                  <li><strong>Step 1:</strong> Buy a square - Enter your name, email, and Venmo</li>
+                  <li><strong>Step 2:</strong> Once all 100 squares are sold, numbers 0-9 are randomly assigned to each row (Seahawks) and column (Patriots)</li>
+                  <li><strong>Step 3:</strong> During the game, after each quarter, we check the score</li>
+                  <li><strong>Step 4:</strong> Match the LAST DIGIT of each team's score to find the winning square</li>
+                </ol>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-blue-900">Payouts:</h3>
+                <ul className="space-y-1 ml-4">
+                  <li>✓ <strong>Q1 Winning Square:</strong> $200</li>
+                  <li>✓ <strong>Q2 Winning Square:</strong> $200</li>
+                  <li>✓ <strong>Q3 Winning Square:</strong> $200</li>
+                  <li>✓ <strong>Final Score Winner:</strong> $300</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="font-bold text-blue-900">Example:</h3>
+                <p className="ml-4 bg-white p-2 rounded border border-gray-300">
+                  Patriots 13 | Seahawks 7<br/>
+                  Look for Patriots row with 3, Seahawks column with 7. That square wins!
+                </p>
+              </div>
+
+              <div className="bg-yellow-100 border border-yellow-400 rounded p-2 text-sm">
+                <strong>💡 Remember:</strong> Numbers are randomly assigned AFTER all squares are sold to ensure fairness!
+              </div>
+            </div>
+          )}
+        </div>
+
         <div className="mb-6 text-center">
           {!allClaimed ? (
             <div className="bg-blue-500 text-white py-3 px-6 rounded-lg inline-block">
@@ -235,7 +280,6 @@ export function Board() {
           )}
         </div>
 
-        {/* Randomize Button */}
         {canRandomize && (
           <div className="mb-6 text-center">
             <button
@@ -247,7 +291,6 @@ export function Board() {
           </div>
         )}
 
-        {/* Score Tracker (only show after randomization) */}
         {boardConfig?.numbers_assigned && (
           <div className="mb-6 bg-white rounded-lg p-6 shadow-lg border-2 border-gray-300">
             <h2 className="text-2xl font-bold mb-4 text-center">Score Tracker & Winner Finder</h2>
@@ -268,22 +311,22 @@ export function Board() {
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Chiefs Score</label>
+                <label className="block text-sm font-medium mb-1">Patriots Score</label>
                 <input
                   type="number"
-                  value={chiefsScore}
-                  onChange={(e) => setChiefsScore(e.target.value)}
+                  value={patriotsScore}
+                  onChange={(e) => setPatriotsScore(e.target.value)}
                   className="w-full px-3 py-2 border rounded-lg"
                   placeholder="0"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium mb-1">Eagles Score</label>
+                <label className="block text-sm font-medium mb-1">Seahawks Score</label>
                 <input
                   type="number"
-                  value={eaglesScore}
-                  onChange={(e) => setEaglesScore(e.target.value)}
+                  value={seahawksScore}
+                  onChange={(e) => setSeahawksScore(e.target.value)}
                   className="w-full px-3 py-2 border rounded-lg"
                   placeholder="0"
                 />
@@ -307,16 +350,14 @@ export function Board() {
           </div>
         )}
 
-        {/* Board */}
         <div className="bg-white rounded-lg p-4 shadow-lg overflow-x-auto">
-          {/* Chiefs Header (Top) */}
           <div className="grid grid-cols-11 gap-1 mb-1">
-            <div className="bg-red-600 text-white font-bold p-2 text-center rounded">
-              Chiefs
+            <div className="bg-blue-700 text-white font-bold p-2 text-center rounded">
+              Patriots
             </div>
             {boardConfig?.numbers_assigned && boardConfig.chiefs_numbers ? (
               boardConfig.chiefs_numbers.map((num, idx) => (
-                <div key={idx} className="bg-red-100 text-red-800 font-bold p-2 text-center rounded">
+                <div key={idx} className="bg-blue-100 text-blue-800 font-bold p-2 text-center rounded">
                   {num}
                 </div>
               ))
@@ -329,13 +370,11 @@ export function Board() {
             )}
           </div>
 
-          {/* Grid with Eagles header (left) */}
           {Array.from({ length: 10 }).map((_, rowIdx) => (
             <div key={rowIdx} className="grid grid-cols-11 gap-1 mb-1">
-              {/* Eagles Header Cell */}
               {rowIdx === 0 ? (
                 <div className="bg-green-600 text-white font-bold p-2 text-center rounded row-span-1">
-                  Eagles
+                  Seahawks
                 </div>
               ) : rowIdx === 1 && boardConfig?.numbers_assigned && boardConfig.eagles_numbers ? (
                 <div className="bg-green-100 text-green-800 font-bold p-2 text-center rounded">
@@ -351,7 +390,6 @@ export function Board() {
                 </div>
               )}
 
-              {/* Square cells */}
               {Array.from({ length: 10 }).map((_, colIdx) => {
                 const position = rowIdx * 10 + colIdx;
                 const square = squares.find(s => s.position === position);
@@ -376,19 +414,16 @@ export function Board() {
           ))}
         </div>
 
-        {/* Stats - Simple version */}
         <div className="mt-6 text-center text-gray-600">
           <p>Claimed: {claimedCount} | Available: {100 - claimedCount}</p>
         </div>
 
-        {/* Footer */}
         <div className="mt-8 text-center text-gray-600 border-t pt-6">
           <p className="font-semibold text-lg">West Cobb Crush 2014 Haney/Woodman</p>
-          <p className="text-sm mt-1">Softball Team Fundraiser</p>
+          <p className="text-sm mt-1">Super Bowl XLIX Fundraiser - Patriots vs Seahawks</p>
         </div>
       </div>
 
-      {/* Claim Modal */}
       {selectedSquare !== null && (
         <ClaimModal
           squareNumber={selectedSquare}
@@ -397,7 +432,6 @@ export function Board() {
         />
       )}
 
-      {/* Square Details Modal */}
       {viewingSquare && (
         <SquareDetailsModal
           square={viewingSquare}

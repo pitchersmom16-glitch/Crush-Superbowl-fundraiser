@@ -1,0 +1,62 @@
+---
+alwaysApply: true
+---
+
+# AI Softball Pro - Project Rules
+
+## Project Context
+This is a multi-stack athlete management software specifically for softball players.
+Stack: [FILL IN: React/Vue? Node/Python backend? Database?]
+Target Users: Softball coaches and players
+
+## Project-Specific Guidelines
+
+### Before Implementing Features - ASK:
+1. "Is this feature for coaches, players, or both?"
+2. "Does this need real-time updates or can it be async?"
+3. "Should this data be stored locally or in the database?"
+4. "What happens if a player/coach is offline?"
+
+### Domain-Specific Terms
+- Use softball terminology correctly (at-bats, ERA, fielding percentage, etc.)
+- "Athlete" in our context = softball player
+- Coach vs Player permissions matter - always clarify which role
+
+### Data Privacy & Security
+- Player data is sensitive - always implement proper auth checks
+- Never expose personal player info in URLs or logs
+- Coaches should only see their team's data
+
+### UI/UX Priorities
+- Mobile-first design (coaches use phones at practice)
+- Quick data entry (minimize typing during games)
+- Offline capability for field use (no WiFi at ballparks)
+- Visual stats dashboards over text-heavy reports
+
+### Performance Requirements
+- Keep app responsive even with 20+ players on roster
+- Optimize video playback (technique analysis)
+- Cache frequently accessed player stats
+
+### Stop and Ask If:
+- You're about to create a new component that might already exist
+- The data model seems unclear or inconsistent
+- You're unsure whether data should be client-side or server-side
+- Authentication/permissions logic is involved
+
+### Testing Scenarios to Consider
+- Empty roster (new coach signup)
+- Single player vs full team
+- Poor network connection
+- Different user roles (head coach, assistant, player, parent)
+
+## File Naming Conventions
+- Components: PascalCase (PlayerCard.jsx)
+- Utilities: camelCase (calculateBattingAverage.js)
+- Hooks: use prefix (usePlayerStats.js)
+- Types: PascalCase with .types.ts suffix (Player.types.ts)
+
+## Error Messages
+- User-friendly language (not technical jargon)
+- Specific actions they can take ("Try refreshing" vs "Error 500")
+- Log technical details to console for debugging
