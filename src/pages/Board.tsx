@@ -354,21 +354,23 @@ export function Board() {
           </div>
         )}
 
-        <div className="bg-white rounded-lg p-4 shadow-lg overflow-x-auto">
+        <p className="text-center text-sm text-gray-500 mb-2 sm:hidden">← Swipe to see full board →</p>
+        <div className="bg-white rounded-lg p-2 sm:p-4 shadow-lg overflow-x-auto overflow-y-hidden -mx-2 sm:mx-0 board-scroll">
+          <div className="min-w-[420px] w-max">
           {/* TOP HEADER: Seattle Seahawks (columns) - GREEN */}
-          <div className="grid grid-cols-11 gap-1 mb-1">
-            <div className="bg-green-600 text-white font-bold p-2 text-center rounded text-xs">
+          <div className="grid grid-cols-11 gap-0.5 sm:gap-1 mb-0.5 sm:mb-1" style={{ gridTemplateColumns: 'minmax(28px, 1fr) repeat(10, minmax(32px, 1fr))' }}>
+            <div className="bg-green-600 text-white font-bold p-1 sm:p-2 text-center rounded text-[10px] sm:text-xs leading-tight">
               Seattle Seahawks
             </div>
             {boardConfig?.numbers_assigned && boardConfig.chiefs_numbers ? (
               boardConfig.chiefs_numbers.map((num, idx) => (
-                <div key={idx} className="bg-green-100 text-green-800 font-bold p-2 text-center rounded">
+                <div key={idx} className="bg-green-100 text-green-800 font-bold p-1 sm:p-2 text-center rounded text-xs sm:text-sm min-w-[28px]">
                   {num}
                 </div>
               ))
             ) : (
               Array.from({ length: 10 }).map((_, idx) => (
-                <div key={idx} className="bg-gray-200 p-2 text-center rounded text-gray-500">
+                <div key={idx} className="bg-gray-200 p-1 sm:p-2 text-center rounded text-gray-500 text-xs min-w-[28px]">
                   ?
                 </div>
               ))
@@ -379,15 +381,15 @@ export function Board() {
           {Array.from({ length: 10 }).map((_, rowIdx) => (
             <div key={rowIdx} className="grid grid-cols-11 gap-1 mb-1">
               {boardConfig?.numbers_assigned && boardConfig.eagles_numbers ? (
-                <div className="bg-blue-100 text-blue-800 font-bold p-2 text-center rounded">
+                <div className="bg-blue-100 text-blue-800 font-bold p-1 sm:p-2 text-center rounded text-xs sm:text-sm min-w-[28px] min-h-[32px] flex items-center justify-center">
                   {boardConfig.eagles_numbers[rowIdx]}
                 </div>
               ) : rowIdx === 0 ? (
-                <div className="bg-blue-800 text-white font-bold p-2 text-center rounded text-xs">
+                <div className="bg-blue-800 text-white font-bold p-1 sm:p-2 text-center rounded text-[10px] sm:text-xs leading-tight min-w-[28px]">
                   NE Patriots
                 </div>
               ) : (
-                <div className="bg-gray-200 p-2 text-center rounded text-gray-500">
+                <div className="bg-gray-200 p-1 sm:p-2 text-center rounded text-gray-500 text-xs min-w-[28px] min-h-[32px] flex items-center justify-center">
                   ?
                 </div>
               )}
@@ -414,6 +416,7 @@ export function Board() {
               })}
             </div>
           ))}
+          </div>
         </div>
 
         <div className="mt-6 text-center text-gray-600">

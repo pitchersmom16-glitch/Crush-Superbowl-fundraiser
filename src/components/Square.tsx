@@ -8,7 +8,7 @@ interface SquareProps {
 
 export function Square({ square, onClick, isWinner }: SquareProps) {
   const getClasses = () => {
-    let classes = 'border-2 rounded-lg p-2 min-h-[80px] md:min-h-[100px] flex flex-col items-center justify-center gap-1 transition-all text-center';
+    let classes = 'border rounded sm:border-2 rounded-lg p-1 sm:p-2 min-h-[32px] min-w-[32px] sm:min-h-[80px] md:min-h-[100px] flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-all text-center text-xs sm:text-sm';
     
     if (isWinner) {
       classes += ' winner-square border-yellow-500 border-4';
@@ -26,19 +26,19 @@ export function Square({ square, onClick, isWinner }: SquareProps) {
       onClick={onClick}
       className={getClasses()}
     >
-      {isWinner && <span className="text-2xl">🎉</span>}
+      {isWinner && <span className="text-base sm:text-2xl">🎉</span>}
       {square.buyer_name ? (
         <>
-          <span className="text-xs text-gray-500">#{square.position}</span>
-          <div className="flex items-center gap-1">
-            <span className="text-green-600">✅</span>
-            <span className="square-claimed-text text-sm truncate max-w-full">{square.buyer_name}</span>
+          <span className="hidden sm:inline text-xs text-gray-500">#{square.position}</span>
+          <div className="flex items-center justify-center gap-0.5 sm:gap-1 min-w-0 w-full">
+            <span className="text-green-600 shrink-0">✅</span>
+            <span className="square-claimed-text text-[10px] sm:text-sm truncate max-w-full">{square.buyer_name}</span>
           </div>
         </>
       ) : (
         <>
-          <span className="text-xs text-gray-400">#{square.position}</span>
-          <span className="text-sm text-gray-500">Available</span>
+          <span className="hidden sm:inline text-xs text-gray-400">#{square.position}</span>
+          <span className="text-[10px] sm:text-sm text-gray-500">Avail</span>
         </>
       )}
     </button>
