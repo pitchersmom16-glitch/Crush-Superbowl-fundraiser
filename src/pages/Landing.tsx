@@ -29,21 +29,48 @@ export function Landing() {
           {/* Personal Story */}
           <div className="bg-card border-2 border-primary/30 rounded-lg p-8 mb-8 text-left max-w-4xl mx-auto">
             <p className="text-lg mb-4">
-              Hi — I'm <strong className="text-primary">Kimberly</strong>, a single mom from Atlanta and Shannon's biggest fan.
+              Hi, I'm <strong className="text-primary">Kimberly</strong> — a single mom, lifelong softball supporter, and Shannon's #1 fan.
             </p>
             
             <p className="text-muted-foreground mb-4">
-              For years, chronic illness (Lyme disease and fibromyalgia) made it hard to function, let alone sit at a computer for more than 20 minutes. But after starting HRT therapy, something clicked. My focus came roaring back.
+              For years, Lyme disease and fibromyalgia made even basic tasks — like sitting at a computer for more than 20 minutes — feel impossible. But after starting HRT therapy, something changed. My focus returned, stronger than ever.
             </p>
             
             <p className="text-muted-foreground mb-4">
-              For the last few weeks I've been working 10+ hours a day learning AI and building something I truly believe can change the game for young softball players.
+              In the past few weeks I've poured 10+ hours a day into learning AI and building <strong className="text-foreground">Softball Pro AI</strong> — the world's first AI-powered softball coach designed specifically for girls 8U–16U.
             </p>
 
-            <div className="bg-accent/10 border border-accent rounded-lg p-4 mt-6">
-              <p className="font-semibold text-lg mb-2">🚨 We're 30 days from serious financial pressure</p>
-              <p className="text-sm text-muted-foreground">
-                I need help to cover one month of rent & essentials, paid AI tool credits, and enough runway to finish the MVP and get it into the hands of players & coaches.
+            <div className="bg-primary/10 border border-primary rounded-lg p-6 mb-6">
+              <p className="font-semibold text-lg mb-3">It's already real:</p>
+              <ul className="space-y-2 text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>Players upload a short video swing or pitch</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>The app analyzes biomechanics in real time (arm slot, knee flexion, torque separation, hip-shoulder-elbow sequencing, and more)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary mt-1">•</span>
+                  <span>It flags injury risks, tracks progress, suggests personalized drills, mindset coaching, and strength plans</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* TODO: Add product screenshots here */}
+            <div className="bg-muted/20 border border-border rounded-lg p-4 mb-6 text-center text-sm text-muted-foreground">
+              <p>📸 Product screenshots coming soon:</p>
+              <p>Biomechanics dashboard • Player mode analysis • Landing page hero</p>
+            </div>
+
+            <div className="bg-accent/10 border border-accent rounded-lg p-6">
+              <p className="font-semibold text-lg mb-3">🚨 We're 30 days away from a wall.</p>
+              <p className="text-muted-foreground mb-4">
+                Rent and essentials are due, and I've maxed out free trials on the AI tools needed to finish the MVP. I'm asking for help to cover one month of rent & living expenses, paid AI tool credits, and enough runway to polish the product and get it into coaches' and parents' hands.
+              </p>
+              <p className="text-foreground font-semibold">
+                This isn't charity — it's a bridge. I've promised to personally return double every contribution once the product launches and generates revenue. You'll also receive Founding Member lifetime access + a special badge on the site.
               </p>
             </div>
           </div>
