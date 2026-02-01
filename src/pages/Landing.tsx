@@ -6,8 +6,9 @@ import logo from '../../softballproai-brand/client/src/assets/logo.jpg';
 // Hero & Personal Photos
 import heroPhoto from '../Images/Me and Shay.jpg';
 import meAndShay2 from '../Images/Me and Shay 2.jpg';
-import meAndShay3 from '../Images/Me and Shay 3.jpg';
+import meAndShay4 from '../Images/Me and shay 4.jpg';
 import heroImage from '../Images/hero.jpg';
+import shannonPitching from '../Images/Shannon pitching.png';
 
 // Product Screenshots
 import bioScreenshot1 from '../Images/SoftballImage 1.jfif';
@@ -65,9 +66,9 @@ export function Landing() {
           {/* Me & Shannon Photo Below */}
           <div className="mt-16 max-w-2xl mx-auto">
             <img 
-              src={heroPhoto} 
+              src={meAndShay4} 
               alt="Kimberly and Shannon - The heart behind SoftballProAI" 
-              className="w-full rounded-lg shadow-neon border-2 border-primary/30"
+              className="w-full h-96 object-cover rounded-lg shadow-neon border-2 border-primary/30"
             />
             <p className="text-center text-lg text-muted-foreground mt-4">
               <strong className="text-primary">Me & Shannon</strong> — Every feature built with her in mind
@@ -91,7 +92,7 @@ export function Landing() {
               <img 
                 src={heroPhoto} 
                 alt="Me and Shannon – why I'm building this" 
-                className="w-full rounded-lg border-2 border-primary/30 mb-2"
+                className="w-full h-64 object-cover rounded-lg border-2 border-primary/30 mb-2"
               />
               <p className="text-center text-sm text-muted-foreground">Me and Shannon – why I'm building this</p>
             </div>
@@ -99,17 +100,17 @@ export function Landing() {
               <img 
                 src={meAndShay2} 
                 alt="Every practice, every dream" 
-                className="w-full rounded-lg border-2 border-primary/30 mb-2"
+                className="w-full h-64 object-cover rounded-lg border-2 border-primary/30 mb-2"
               />
               <p className="text-center text-sm text-muted-foreground">Every practice, every dream</p>
             </div>
             <div>
               <img 
-                src={meAndShay3} 
-                alt="Building for the next generation of players" 
-                className="w-full rounded-lg border-2 border-primary/30 mb-2"
+                src={shannonPitching} 
+                alt="Shannon pitching - building for the next generation" 
+                className="w-full h-64 object-cover rounded-lg border-2 border-primary/30 mb-2"
               />
-              <p className="text-center text-sm text-muted-foreground">Building for the next generation</p>
+              <p className="text-center text-sm text-muted-foreground">Shannon in action</p>
             </div>
           </div>
 
