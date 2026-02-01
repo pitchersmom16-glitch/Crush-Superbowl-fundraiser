@@ -423,7 +423,7 @@ export function Board() {
         </div>
 
         <div className="mt-8 text-center text-gray-600 border-t pt-6">
-          <p className="font-semibold text-lg">West Cobb Crush 2014 Haney/Woodman</p>
+          <p className="font-semibold text-lg">SoftballProAI — Building the Future of Softball Coaching</p>
           <p className="text-sm mt-1">Super Bowl XLIX Fundraiser - Patriots vs Seahawks</p>
         </div>
       </div>

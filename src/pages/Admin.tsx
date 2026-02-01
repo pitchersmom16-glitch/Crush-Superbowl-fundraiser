@@ -56,7 +56,7 @@ export function Admin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'crush2014') {
+    if (password === 'softballproai2024') {
       setAuthenticated(true);
     } else {
       alert('Incorrect password');

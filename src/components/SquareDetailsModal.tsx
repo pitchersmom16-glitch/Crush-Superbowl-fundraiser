@@ -89,7 +89,7 @@ export function SquareDetailsModal({ square, onClose, onSuccess }: SquareDetails
         </button>
 
         <h2 className="text-2xl font-bold mb-2 text-center">Square #{square.position} - Claimed</h2>
-        <p className="text-sm text-gray-600 text-center mb-4">West Cobb Crush 2014 Haney/Woodman</p>
+        <p className="text-sm text-gray-600 text-center mb-4">SoftballProAI Founding Member Program</p>
 
         {!isEditing ? (
           <div className="space-y-4">

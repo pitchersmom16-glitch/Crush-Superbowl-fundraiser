@@ -21,7 +21,7 @@ git init
 git add .
 
 # Commit
-git commit -m "Initial commit - Crush Fundraiser"
+git commit -m "Initial commit - SoftballProAI Fundraiser"
 
 # Create repo on GitHub, then:
 git remote add origin YOUR_GITHUB_REPO_URL
@@ -48,7 +48,7 @@ git push -u origin master
 
 7. **Click** "Deploy"
 8. **Wait** 2-3 minutes
-9. **Done!** You'll get a URL like: `crush-fundraiser.vercel.app`
+9. **Done!** You'll get a URL like: `softballproai-fundraiser.vercel.app`
 
 ### 3️⃣ Test Your Live Site
 
@@ -61,7 +61,7 @@ git push -u origin master
 
 1. Go to [bit.ly](https://bit.ly)
 2. Paste your Vercel URL
-3. Customize: `bit.ly/CrushSB2024`
+3. Customize: `bit.ly/SoftballProAI`
 4. Test it 3 times
 
 ### 5️⃣ Post to Facebook!
@@ -69,19 +69,19 @@ git push -u origin master
 Use this template:
 
 ```
-🎉 CRUSH FAM! 🎉
+🎉 BECOME A FOUNDING MEMBER! 🎉
 
-Support West Cobb Crush 2014 Haney/Woodman with our Super Bowl Squares Fundraiser!
+Help us build SoftballProAI — the first AI-powered softball coaching platform for girls!
 
-🏈 $20 per square
-🎯 Prizes every quarter + FINAL SCORE
-✨ 100% supports our team
+💰 Starting at $25
+🏆 Lifetime premium access  
+💯 100% repaid once funded
 
-👉 CLAIM NOW: bit.ly/CrushSB2024
+👉 JOIN NOW: bit.ly/SoftballProAI
 
-Tag a friend who loves football! 👇
+Tag a friend who loves softball! 👇
 
-#WestCobbCrush #SuperBowl2025 #SupportLocal
+#SoftballProAI #FoundingMember #SupportInnovation
 ```
 
 ---

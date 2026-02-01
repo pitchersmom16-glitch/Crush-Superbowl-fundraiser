@@ -1,4 +1,4 @@
-# Deployment Checklist for West Cobb Crush Fundraiser
+# Deployment Checklist for SoftballProAI Fundraiser
 
 ## Pre-Deployment Steps
 
@@ -75,12 +75,12 @@ npm run build
 - [ ] Edit square info
 - [ ] Unclaim square
 - [ ] Check all branding shows correctly
-- [ ] Test Admin page login (password: crush2014)
+- [ ] Test Admin page login (password: softballproai2024)
 
 ### ✅ Create Short Link
 - [ ] Go to https://bit.ly
 - [ ] Paste your live URL
-- [ ] Create custom link: `bit.ly/CrushSB2024` (or similar)
+- [ ] Create custom link: `bit.ly/SoftballProAI` (or similar)
 - [ ] Test short link 3 times
 - [ ] Share with 2-3 friends to test
 
@@ -98,8 +98,8 @@ npm run build
 **Supabase Dashboard:** https://supabase.com/dashboard
 **Deployment URL:** (fill in after deployment)
 **Short Link:** (fill in after creation)
-**Admin Password:** crush2014
-**Venmo:** @WCCRUSH2014
+**Admin Password:** softballproai2024
+**Venmo:** @Kimberly-Tarnovska
 
 ---
 

@@ -1,73 +1,57 @@
-# React + TypeScript + Vite
+# SoftballProAI — Become a Founding Member
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Your kid's private, always-on softball coach — powered by AI and real biomechanics.**
 
-Currently, two official plugins are available:
+## The Story
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Hi — I'm Kimberly, a single mom from Atlanta and Shannon's biggest fan.
 
-## React Compiler
+For years, chronic illness (Lyme disease and fibromyalgia) made it hard to function. But after starting HRT therapy, my focus came roaring back. For the last few weeks I've been working 10+ hours a day learning AI and building something that can change the game for young softball players.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**SoftballProAI** analyzes swing and pitch videos instantly, breaking down biomechanics (arm slot, knee flexion, torque separation) and providing personalized training plans. It's like having a private coach in your pocket — one that never sleeps and is obsessed with helping your player reach her potential.
 
-## Expanding the ESLint configuration
+## Current Status (Feb 2026)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+✅ **Player mode is working** — Real-time video analysis with biomechanics breakdown  
+✅ **AI brain trained** — Rules, drills, coaching techniques, injury prevention loaded  
+🚀 **Next:** Coach dashboard, team features, polished UI
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Why I'm Fundraising
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+We're 30 days from serious financial pressure. I need help to cover:
+- One month of rent & essentials
+- Paid AI tool credits (Lovable, Replit, API access)
+- Enough runway to finish the MVP
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## The Promise
+
+This is **not charity** — it's a bridge.
+
+**Double Payback Promise:** I will personally return **2× whatever you contribute** once the product launches and generates revenue.
+
+Plus:
+- Lifetime free account
+- Founding Member badge
+- Your name in credits (optional)
+
+## Tech Stack
+
+- React + TypeScript + Vite
+- Supabase (database)
+- Tailwind CSS
+- Vercel (hosting)
+
+## Get Started
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+See [FUNDRAISER-README.md](FUNDRAISER-README.md) for complete setup instructions.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Built with ❤️ by Kimberly (Shannon's mom) in Atlanta, GA**
+
+*If you're a softball parent, coach, or just believe in second chances and big dreams — thank you for being here.*

@@ -12,6 +12,16 @@ CREATE TABLE squares (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- Create the founding_members table
+CREATE TABLE founding_members (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  tier TEXT NOT NULL CHECK (tier IN ('Bronze', 'Silver', 'Gold', 'Platinum')),
+  email TEXT,
+  badge_number INTEGER UNIQUE CHECK (badge_number >= 1 AND badge_number <= 100),
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
 -- Create the board_config table
 CREATE TABLE board_config (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -35,6 +45,7 @@ INSERT INTO board_config (numbers_assigned) VALUES (false);
 -- Enable Row Level Security (RLS)
 ALTER TABLE squares ENABLE ROW LEVEL SECURITY;
 ALTER TABLE board_config ENABLE ROW LEVEL SECURITY;
+ALTER TABLE founding_members ENABLE ROW LEVEL SECURITY;
 
 -- Create policies to allow public read access
 CREATE POLICY "Allow public read access" ON squares FOR SELECT USING (true);
@@ -44,6 +55,10 @@ CREATE POLICY "Allow public update" ON squares FOR UPDATE USING (true);
 CREATE POLICY "Allow public read access" ON board_config FOR SELECT USING (true);
 CREATE POLICY "Allow public update" ON board_config FOR UPDATE USING (true);
 
+CREATE POLICY "Allow public read access" ON founding_members FOR SELECT USING (true);
+CREATE POLICY "Allow public insert" ON founding_members FOR INSERT WITH CHECK (true);
+
 -- Enable Realtime
 ALTER PUBLICATION supabase_realtime ADD TABLE squares;
 ALTER PUBLICATION supabase_realtime ADD TABLE board_config;
+ALTER PUBLICATION supabase_realtime ADD TABLE founding_members;
