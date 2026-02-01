@@ -3,7 +3,7 @@ import { DonationTiers } from '../components/DonationTiers';
 import { BadgeWall } from '../components/BadgeWall';
 import logo from '../../softballproai-brand/client/src/assets/logo.jpg';
 
-// Shannon Action Shots - HERO IMAGES
+// Shannon Action Shots
 import shannonHero from '../Images/UseHeroImageShannon.jpg';
 import shannonHitting from '../Images/UseHittingImageShannon.jpg';
 
@@ -12,8 +12,12 @@ import meAndShannon1 from '../Images/Use 1 me and Shannon.jpg';
 import meAndShannon2 from '../Images/Use 2 me and Shannon.jpg';
 import meAndShannon3 from '../Images/Use 3 me and shannon.jpg';
 
-// Product/Context Photos
+// Team & Context Photos
+import teamPhoto from '../Images/UseCrush Team Pic.jpg';
 import softballMoms from '../Images/UseSoftballMoms.jpg';
+
+// Product/Tech Photos
+import heroTech from '../Images/UseHero.jpg';
 import techPhoto from '../Images/UseTechPhoto1.jpg';
 
 export function Landing() {
@@ -57,33 +61,81 @@ export function Landing() {
             </button>
           </div>
 
-          {/* SHANNON HERO IMAGE - MOST PROMINENT */}
-          <div className="max-w-6xl mx-auto mb-16">
-            <div className="relative rounded-3xl overflow-hidden border-4 border-primary shadow-[0_0_50px_rgba(57,255,20,0.9)]">
+          {/* SHANNON + BIOMECHANICS HERO - SIDE BY SIDE */}
+          <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto mb-16">
+            {/* Shannon Action Shot */}
+            <div className="relative rounded-2xl overflow-hidden border-4 border-primary shadow-[0_0_40px_rgba(57,255,20,0.8)]">
               <img 
                 src={shannonHero} 
                 alt="Shannon - The inspiration behind SoftballProAI" 
-                className="w-full h-[700px] object-cover object-center"
+                className="w-full h-[500px] object-cover object-center"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/80 to-transparent p-10">
-                <p className="text-4xl md:text-5xl font-bold text-primary mb-3">Shannon — Every Feature Built For Her</p>
-                <p className="text-xl md:text-2xl text-white">This is why we're building SoftballProAI</p>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                <p className="text-2xl md:text-3xl font-bold text-primary mb-2">Shannon in Action</p>
+                <p className="text-lg text-white">Every feature built for her</p>
+              </div>
+            </div>
+
+            {/* Biomechanics Platform */}
+            <div className="relative rounded-2xl overflow-hidden border-4 border-primary shadow-[0_0_40px_rgba(57,255,20,0.8)]">
+              <img 
+                src={heroTech} 
+                alt="SoftballProAI Biomechanics Analysis Platform" 
+                className="w-full h-[500px] object-cover object-center"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
+                <p className="text-2xl md:text-3xl font-bold text-primary mb-2">AI Analysis in Real-Time</p>
+                <p className="text-lg text-white">Biomechanics breakdown</p>
               </div>
             </div>
           </div>
 
-          {/* Shannon Hitting - Secondary Hero */}
-          <div className="max-w-5xl mx-auto">
-            <div className="relative rounded-2xl overflow-hidden border-4 border-primary/70 shadow-[0_0_35px_rgba(57,255,20,0.7)]">
+          {/* Team Photo */}
+          <div className="max-w-5xl mx-auto mb-16">
+            <div className="relative rounded-xl overflow-hidden border-3 border-accent/70 shadow-[0_0_30px_rgba(255,0,230,0.6)]">
               <img 
-                src={shannonHitting} 
-                alt="Shannon hitting - Training smarter with AI" 
-                className="w-full h-[500px] object-cover object-center"
+                src={teamPhoto} 
+                alt="Softball team - Building for the community" 
+                className="w-full h-[400px] object-cover object-center"
               />
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-6">
-                <p className="text-2xl md:text-3xl font-bold text-primary">Shannon at the Plate</p>
-                <p className="text-lg md:text-xl text-white">Real-time biomechanics analysis in action</p>
+                <p className="text-2xl md:text-3xl font-bold text-accent">Built for the Softball Community</p>
+                <p className="text-lg text-white">Every player, every parent, every coach</p>
               </div>
+            </div>
+          </div>
+
+          {/* Shannon Hitting - Flows with other photos */}
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div className="group">
+              <div className="overflow-hidden rounded-xl border-3 border-primary/50 hover:border-primary transition-all shadow-lg">
+                <img 
+                  src={shannonHitting} 
+                  alt="Shannon hitting" 
+                  className="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-base text-muted-foreground mt-4 font-medium">Shannon at the Plate</p>
+            </div>
+            <div className="group">
+              <div className="overflow-hidden rounded-xl border-3 border-primary/50 hover:border-primary transition-all shadow-lg">
+                <img 
+                  src={softballMoms} 
+                  alt="Softball moms community" 
+                  className="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-base text-muted-foreground mt-4 font-medium">For Parents & Coaches</p>
+            </div>
+            <div className="group">
+              <div className="overflow-hidden rounded-xl border-3 border-primary/50 hover:border-primary transition-all shadow-lg">
+                <img 
+                  src={techPhoto} 
+                  alt="SoftballProAI technology" 
+                  className="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-base text-muted-foreground mt-4 font-medium">Advanced Technology</p>
             </div>
           </div>
         </div>
