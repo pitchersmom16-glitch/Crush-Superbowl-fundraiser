@@ -1,8 +1,16 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.VITE_SUPABASE_URL || '';
-const supabaseKey = process.env.VITE_SUPABASE_ANON_KEY || '';
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Vercel serverless functions don't use VITE_ prefix
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error('Missing Supabase environment variables');
+}
+
+const supabase = supabaseUrl && supabaseKey 
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
 
 export default async function handler(req: any, res: any) {
   // Set CORS headers
@@ -16,6 +24,10 @@ export default async function handler(req: any, res: any) {
 
   if (req.method === 'GET') {
     try {
+      if (!supabase) {
+        return res.status(500).json({ error: 'Database not configured' });
+      }
+
       const { data, error } = await supabase
         .from('founding_members')
         .select('*')
@@ -43,6 +55,10 @@ export default async function handler(req: any, res: any) {
 
   if (req.method === 'POST') {
     try {
+      if (!supabase) {
+        return res.status(500).json({ error: 'Database not configured' });
+      }
+
       const { name, tier, email, badge_number } = req.body;
 
       // Validation
