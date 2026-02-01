@@ -1,21 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Vercel serverless functions don't use VITE_ prefix
 const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
-
-console.log('Environment check:', {
-  hasSupabaseUrl: !!supabaseUrl,
-  hasSupabaseKey: !!supabaseKey,
-  urlPrefix: supabaseUrl.substring(0, 20)
-});
 
 const supabase = supabaseUrl && supabaseKey 
   ? createClient(supabaseUrl, supabaseKey)
   : null;
 
-export default async function handler(req: any, res: any) {
-  // Set CORS headers
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -37,11 +29,10 @@ export default async function handler(req: any, res: any) {
 
       if (error) throw error;
 
-      // Create array of 100 members, filling in blanks with null
       const members = Array(100).fill(null);
       
       if (data) {
-        data.forEach((member: any) => {
+        data.forEach((member) => {
           if (member.badge_number && member.badge_number >= 1 && member.badge_number <= 100) {
             members[member.badge_number - 1] = member;
           }
@@ -49,7 +40,7 @@ export default async function handler(req: any, res: any) {
       }
 
       return res.status(200).json(members);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error fetching founding members:', error);
       return res.status(500).json({ error: 'Failed to fetch founding members' });
     }
@@ -63,7 +54,6 @@ export default async function handler(req: any, res: any) {
 
       const { name, tier, email, badge_number } = req.body;
 
-      // Validation
       if (!name || !name.trim()) {
         return res.status(400).json({ error: 'Name is required' });
       }
@@ -76,7 +66,6 @@ export default async function handler(req: any, res: any) {
         return res.status(400).json({ error: 'Valid badge number is required' });
       }
 
-      // Check if badge is already claimed
       const { data: existing } = await supabase
         .from('founding_members')
         .select('id')
@@ -87,7 +76,6 @@ export default async function handler(req: any, res: any) {
         return res.status(409).json({ error: 'This badge has already been claimed' });
       }
 
-      // Insert new founding member
       const { data, error } = await supabase
         .from('founding_members')
         .insert([{
@@ -102,7 +90,7 @@ export default async function handler(req: any, res: any) {
       if (error) throw error;
 
       return res.status(201).json(data);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error creating founding member:', error);
       return res.status(500).json({ error: 'Failed to create founding member' });
     }
