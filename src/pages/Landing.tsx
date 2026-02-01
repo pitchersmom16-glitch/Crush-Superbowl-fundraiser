@@ -1,11 +1,13 @@
 import { Trophy } from 'lucide-react';
 import { DonationTiers } from '../components/DonationTiers';
 import { BadgeWall } from '../components/BadgeWall';
+import logo from '../../softballproai-brand/client/src/assets/logo.jpg';
 
 // Hero & Personal Photos
 import heroPhoto from '../Images/Me and Shay.jpg';
 import meAndShay2 from '../Images/Me and Shay 2.jpg';
 import meAndShay3 from '../Images/Me and Shay 3.jpg';
+import heroImage from '../Images/hero.jpg';
 
 // Product Screenshots
 import bioScreenshot1 from '../Images/SoftballImage 1.jfif';
@@ -20,37 +22,56 @@ export function Landing() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       
-      {/* HERO SECTION - Full Width */}
-      <section className="relative bg-gradient-to-br from-background via-card to-background">
-        <div className="container mx-auto max-w-6xl px-4 py-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+      {/* HERO SECTION - Full Width with Prominent Branding */}
+      <section className="relative min-h-screen bg-gradient-to-br from-background via-card to-background">
+        <div className="container mx-auto max-w-7xl px-4 py-8">
+          
+          {/* Logo at top */}
+          <div className="text-center mb-8">
+            <img src={logo} alt="SoftballProAI Logo" className="w-48 md:w-64 mx-auto drop-shadow-neon" />
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Hero Text */}
             <div className="text-center md:text-left order-2 md:order-1">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4 text-primary">
+              <h1 className="text-6xl md:text-7xl font-bold mb-6 text-primary leading-tight">
                 Softball Pro AI
               </h1>
-              <p className="text-2xl md:text-3xl font-semibold mb-4 text-foreground">
+              <p className="text-3xl md:text-4xl font-semibold mb-6 text-foreground leading-tight">
                 Built by a mom for young softball players
               </p>
-              <p className="text-lg text-muted-foreground mb-6">
-                Helping girls 8U–16U train smarter and safer
+              <p className="text-xl text-muted-foreground mb-8">
+                Helping girls 8U–16U train smarter and safer with AI-powered biomechanics analysis
               </p>
               <button
                 onClick={scrollToTiers}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-4 px-8 rounded-lg text-xl shadow-neon transition-all"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-5 px-12 rounded-lg text-2xl shadow-neon transition-all hover:scale-105"
               >
                 Become a Founding Member
               </button>
             </div>
             
-            {/* Hero Image */}
+            {/* Hero Brand Image - Large and Prominent */}
             <div className="order-1 md:order-2">
               <img 
-                src={heroPhoto} 
-                alt="Kimberly and Shannon - The heart behind SoftballProAI" 
-                className="w-full rounded-lg shadow-neon border-2 border-primary/30"
+                src={heroImage} 
+                alt="SoftballProAI - AI-powered softball coaching platform" 
+                className="w-full rounded-xl shadow-neon border-4 border-primary"
               />
+              <p className="text-center text-sm text-muted-foreground mt-3">Real-time biomechanics analysis for pitchers and hitters</p>
             </div>
+          </div>
+
+          {/* Me & Shannon Photo Below */}
+          <div className="mt-16 max-w-2xl mx-auto">
+            <img 
+              src={heroPhoto} 
+              alt="Kimberly and Shannon - The heart behind SoftballProAI" 
+              className="w-full rounded-lg shadow-neon border-2 border-primary/30"
+            />
+            <p className="text-center text-lg text-muted-foreground mt-4">
+              <strong className="text-primary">Me & Shannon</strong> — Every feature built with her in mind
+            </p>
           </div>
         </div>
       </section>
