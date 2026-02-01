@@ -2,18 +2,19 @@ import { useState } from 'react';
 import { X } from 'lucide-react';
 
 interface ClaimBadgeModalProps {
-  badgeNumber: number;
+  badgeNumber?: number;
+  preselectedTier?: string;
   onClose: () => void;
   onSuccess: () => void;
 }
 
 const tiers = ['Bronze', 'Silver', 'Gold', 'Platinum'];
 
-export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeModalProps) {
+export function ClaimBadgeModal({ badgeNumber, preselectedTier, onClose, onSuccess }: ClaimBadgeModalProps) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    tier: 'Bronze',
+    tier: preselectedTier || 'Bronze',
     confirmed: false
   });
   const [loading, setLoading] = useState(false);
@@ -45,7 +46,7 @@ export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeM
           name: formData.name.trim(),
           tier: formData.tier,
           email: formData.email.trim() || null,
-          badge_number: badgeNumber
+          badge_number: badgeNumber || null // null = auto-assign next available
         }),
       });
 
@@ -63,8 +64,8 @@ export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeM
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-      <div className="bg-card border-2 border-primary rounded-lg max-w-md w-full p-6 relative">
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 sm:p-6 z-50" role="dialog" aria-modal="true">
+      <div className="bg-card border-2 border-primary rounded-lg max-w-md w-full p-4 sm:p-6 relative max-h-[90vh] overflow-y-auto">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-muted-foreground hover:text-foreground"
@@ -72,9 +73,11 @@ export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeM
           <X size={24} />
         </button>
 
-        <h2 className="text-2xl font-bold mb-2 text-center">Claim Badge #{badgeNumber}</h2>
-        <p className="text-sm text-muted-foreground text-center mb-6">
-          SoftballProAI Founding Member Program
+        <h2 className="text-xl sm:text-2xl font-bold mb-2 text-center">
+          {badgeNumber ? `Claim Badge #${badgeNumber}` : 'Claim Your Founding Member Badge'}
+        </h2>
+        <p className="text-xs sm:text-sm text-muted-foreground text-center mb-4 sm:mb-6">
+          {badgeNumber ? 'Reserve your specific badge number' : 'You\'ll be assigned the next available badge'}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -88,7 +91,7 @@ export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeM
               placeholder="The Smith Family"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2 bg-input border-2 border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              className="w-full px-4 py-3 text-base bg-input border-2 border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary min-h-[44px]"
               required
             />
           </div>
@@ -102,7 +105,7 @@ export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeM
               placeholder="your@email.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-2 bg-input border-2 border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              className="w-full px-4 py-3 text-base bg-input border-2 border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary min-h-[44px]"
             />
           </div>
 
@@ -113,13 +116,17 @@ export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeM
             <select
               value={formData.tier}
               onChange={(e) => setFormData({ ...formData, tier: e.target.value })}
-              className="w-full px-4 py-2 bg-input border-2 border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
+              className="w-full px-4 py-3 text-base bg-input border-2 border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary min-h-[44px]"
               required
+              disabled={!!preselectedTier}
             >
               {tiers.map(tier => (
                 <option key={tier} value={tier}>{tier} Founding Member</option>
               ))}
             </select>
+            {preselectedTier && (
+              <p className="text-xs text-muted-foreground mt-1">Tier locked based on your donation</p>
+            )}
           </div>
 
           <div className="flex items-start gap-2">
@@ -142,18 +149,18 @@ export function ClaimBadgeModal({ badgeNumber, onClose, onSuccess }: ClaimBadgeM
             </div>
           )}
 
-          <div className="flex gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-secondary text-secondary-foreground py-3 rounded-lg font-semibold hover:bg-secondary/80 transition-all"
+              className="w-full sm:flex-1 bg-secondary text-secondary-foreground py-3 rounded-lg font-semibold hover:bg-secondary/80 transition-all min-h-[44px] text-base focus:outline-none focus:ring-2 focus:ring-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-full sm:flex-1 bg-primary text-primary-foreground py-3 rounded-lg font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all min-h-[44px] text-base focus:outline-none focus:ring-2 focus:ring-primary"
             >
               {loading ? 'Claiming...' : 'Claim Badge'}
             </button>

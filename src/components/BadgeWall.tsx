@@ -65,7 +65,7 @@ export function BadgeWall() {
 
   return (
     <>
-      <div className="mb-12">
+      <div id="badge-wall" className="mb-12">
         <h2 className="text-4xl font-bold text-center mb-4">Founding Member Wall</h2>
         <p className="text-center text-muted-foreground mb-2">
           {members.length} of {totalBadges} badges claimed

@@ -62,14 +62,38 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Valid tier is required' });
       }
 
-      if (!badge_number || badge_number < 1 || badge_number > 100) {
-        return res.status(400).json({ error: 'Valid badge number is required' });
+      let assignedBadgeNumber = badge_number;
+
+      // Auto-assign next available badge if not specified
+      if (!assignedBadgeNumber) {
+        const { data: allMembers } = await supabase
+          .from('founding_members')
+          .select('badge_number')
+          .order('badge_number', { ascending: true });
+
+        const takenNumbers = new Set(allMembers?.map(m => m.badge_number) || []);
+        
+        for (let i = 1; i <= 100; i++) {
+          if (!takenNumbers.has(i)) {
+            assignedBadgeNumber = i;
+            break;
+          }
+        }
+
+        if (!assignedBadgeNumber) {
+          return res.status(400).json({ error: 'All 100 founding member badges have been claimed' });
+        }
+      }
+
+      // Validate badge number range
+      if (assignedBadgeNumber < 1 || assignedBadgeNumber > 100) {
+        return res.status(400).json({ error: 'Badge number must be between 1 and 100' });
       }
 
       const { data: existing } = await supabase
         .from('founding_members')
         .select('id')
-        .eq('badge_number', badge_number)
+        .eq('badge_number', assignedBadgeNumber)
         .single();
 
       if (existing) {
@@ -82,7 +106,7 @@ export default async function handler(req, res) {
           name: name.trim(),
           tier,
           email: email?.trim() || null,
-          badge_number
+          badge_number: assignedBadgeNumber
         }])
         .select()
         .single();
