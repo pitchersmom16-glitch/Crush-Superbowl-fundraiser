@@ -185,9 +185,9 @@ export function Board() {
       const winningSquare = squares.find(s => s.position === position);
       
       if (winningSquare?.buyer_name) {
-        setWinnerMessage(`🎉 ${winningSquare.buyer_name} WINS ${currentQuarter} for West Cobb Crush 2014 Haney/Woodman!`);
+        setWinnerMessage(`🎉 ${winningSquare.buyer_name} is Founding Member #${position} for SoftballProAI!`);
       } else {
-        setWinnerMessage(`Square #${position} wins ${currentQuarter} for West Cobb Crush 2014 Haney/Woodman!`);
+        setWinnerMessage(`Founding Member Spot #${position} for SoftballProAI!`);
       }
     }
   };
@@ -211,7 +211,7 @@ export function Board() {
             <Home size={24} />
             <span>Back to Home</span>
           </button>
-          <h1 className="text-3xl font-bold">Super Bowl Squares</h1>
+          <h1 className="text-3xl font-bold">Founding Member Board</h1>
         </div>
 
         <div className="mb-6 bg-blue-50 border-2 border-blue-200 rounded-lg p-4">
@@ -220,46 +220,45 @@ export function Board() {
             className="flex items-center gap-2 w-full text-left font-bold text-lg text-blue-800 hover:text-blue-600"
           >
             <ChevronDown size={24} className={`transition-transform ${showInstructions ? 'rotate-180' : ''}`} />
-            📋 How to Play - Super Bowl Squares
+            📋 How to Become a Founding Member
           </button>
           
           {showInstructions && (
             <div className="mt-4 space-y-3 text-gray-700">
               <div>
-                <h3 className="font-bold text-blue-900">What is Super Bowl Squares?</h3>
-                <p>A 10×10 grid with 100 squares. Each square costs $20 and funds the West Cobb Crush 2014 Haney/Woodman Softball Team.</p>
+                <h3 className="font-bold text-blue-900">What is SoftballProAI?</h3>
+                <p>We&apos;re building the first AI-powered softball coaching platform for girls. A 10×10 grid with 100 founding member spots. Each membership costs $20 and grants you lifetime premium access.</p>
               </div>
               
               <div>
                 <h3 className="font-bold text-blue-900">How It Works:</h3>
                 <ol className="list-decimal list-inside space-y-1 ml-2">
-                  <li><strong>Step 1:</strong> Buy a square - Enter your name, email, and Venmo</li>
-                  <li><strong>Step 2:</strong> Once all 100 squares are sold, numbers 0-9 are randomly assigned to each row (Patriots) and column (Seahawks)</li>
-                  <li><strong>Step 3:</strong> During the game, after each quarter, we check the score</li>
-                  <li><strong>Step 4:</strong> Match the LAST DIGIT of each team's score to find the winning square</li>
+                  <li><strong>Step 1:</strong> Claim your spot - Enter your name, email, and phone</li>
+                  <li><strong>Step 2:</strong> Contribute $20 via Venmo to @SoftballProAI</li>
+                  <li><strong>Step 3:</strong> Get immediate founding member status</li>
+                  <li><strong>Step 4:</strong> Once funded, receive full repayment + keep lifetime access!</li>
                 </ol>
               </div>
 
               <div>
-                <h3 className="font-bold text-blue-900">Payouts:</h3>
+                <h3 className="font-bold text-blue-900">Founding Member Benefits:</h3>
                 <ul className="space-y-1 ml-4">
-                  <li>✓ <strong>Q1 Winning Square:</strong> $200</li>
-                  <li>✓ <strong>Q2 Winning Square:</strong> $200</li>
-                  <li>✓ <strong>Q3 Winning Square:</strong> $200</li>
-                  <li>✓ <strong>Final Score Winner:</strong> $300</li>
+                  <li>✓ <strong>Lifetime Premium Access</strong> to all features</li>
+                  <li>✓ <strong>AI-Powered Training Analysis</strong> for your athletes</li>
+                  <li>✓ <strong>Early Access to New Features</strong> before public release</li>
+                  <li>✓ <strong>Full Donation Repayment</strong> once project is funded</li>
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-bold text-blue-900">Example:</h3>
+                <h3 className="font-bold text-blue-900">Our Mission:</h3>
                 <p className="ml-4 bg-white p-2 rounded border border-gray-300">
-                  Patriots 13 | Seahawks 7<br/>
-                  Look for Patriots row with 3, Seahawks column with 7. That square wins!
+                  Help us build the first AI-powered softball coaching platform for girls. Your contribution helps launch the platform, and you&apos;ll be repaid in full once we&apos;re funded while keeping all founding member benefits!
                 </p>
               </div>
 
               <div className="bg-yellow-100 border border-yellow-400 rounded p-2 text-sm">
-                <strong>💡 Remember:</strong> Numbers are randomly assigned AFTER all squares are sold to ensure fairness!
+                <strong>💡 Remember:</strong> Only 100 founding member spots available! All donations will be fully repaid once the project is funded.
               </div>
             </div>
           )}
@@ -268,18 +267,18 @@ export function Board() {
         <div className="mb-6 text-center">
           {!allClaimed ? (
             <div className="bg-blue-500 text-white py-3 px-6 rounded-lg inline-block">
-              <span className="text-xl font-bold">CLAIM YOUR SQUARE! {claimedCount}/100 claimed</span>
-              <p className="text-sm mt-1">West Cobb Crush 2014 Haney/Woodman</p>
+              <span className="text-xl font-bold">CLAIM YOUR SPOT! {claimedCount}/100 founding members</span>
+              <p className="text-sm mt-1">SoftballProAI Founding Member Program</p>
             </div>
           ) : !boardConfig?.numbers_assigned ? (
             <div className="bg-yellow-500 text-white py-3 px-6 rounded-lg inline-block">
-              <span className="text-xl font-bold">ALL SQUARES CLAIMED! Ready to randomize</span>
-              <p className="text-sm mt-1">West Cobb Crush 2014 Haney/Woodman</p>
+              <span className="text-xl font-bold">ALL SPOTS CLAIMED! Ready to finalize</span>
+              <p className="text-sm mt-1">SoftballProAI Founding Member Program</p>
             </div>
           ) : (
             <div className="bg-green-500 text-white py-3 px-6 rounded-lg inline-block">
-              <span className="text-xl font-bold">GAME LOCKED & READY! Enter scores to find winners</span>
-              <p className="text-sm mt-1">West Cobb Crush 2014 Haney/Woodman</p>
+              <span className="text-xl font-bold">FOUNDING MEMBERS LOCKED IN!</span>
+              <p className="text-sm mt-1">SoftballProAI — Building the future of softball coaching</p>
             </div>
           )}
         </div>

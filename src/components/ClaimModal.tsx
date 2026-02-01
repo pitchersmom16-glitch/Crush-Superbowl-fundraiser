@@ -59,8 +59,8 @@ export function ClaimModal({ squareNumber, onClose, onSuccess }: ClaimModalProps
           <X size={24} />
         </button>
 
-        <h2 className="text-2xl font-bold mb-2 text-center">Claim Square #{squareNumber}</h2>
-        <p className="text-sm text-gray-600 text-center mb-4">West Cobb Crush 2014 Haney/Woodman</p>
+        <h2 className="text-2xl font-bold mb-2 text-center">Claim Founding Member Spot #{squareNumber}</h2>
+        <p className="text-sm text-gray-600 text-center mb-4">SoftballProAI Founding Member Program</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
