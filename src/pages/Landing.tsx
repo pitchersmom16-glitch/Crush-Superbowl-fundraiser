@@ -87,30 +87,52 @@ export function Landing() {
             But after starting HRT therapy, my focus returned stronger than ever.
           </p>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            <div>
-              <img 
-                src={heroPhoto} 
-                alt="Me and Shannon – why I'm building this" 
-                className="w-full h-64 object-cover rounded-lg border-2 border-primary/30 mb-2"
-              />
-              <p className="text-center text-sm text-muted-foreground">Me and Shannon – why I'm building this</p>
-            </div>
-            <div>
-              <img 
-                src={meAndShay2} 
-                alt="Every practice, every dream" 
-                className="w-full h-64 object-cover rounded-lg border-2 border-primary/30 mb-2"
-              />
-              <p className="text-center text-sm text-muted-foreground">Every practice, every dream</p>
-            </div>
-            <div>
+          {/* SHANNON PITCHING - HERO ACTION SHOT - MOST PROMINENT */}
+          <div className="mb-12 max-w-3xl mx-auto">
+            <div className="relative">
               <img 
                 src={shannonPitching} 
-                alt="Shannon pitching - building for the next generation" 
-                className="w-full h-64 object-cover rounded-lg border-2 border-primary/30 mb-2"
+                alt="Shannon pitching - The reason behind every feature" 
+                className="w-full h-[500px] object-cover rounded-2xl border-4 border-primary shadow-[0_0_30px_rgba(57,255,20,0.6)]"
               />
-              <p className="text-center text-sm text-muted-foreground">Shannon in action</p>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-2xl">
+                <p className="text-2xl font-bold text-primary">Shannon — Pitching Practice</p>
+                <p className="text-lg text-white">Every feature is built with her dreams in mind</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Me & Shannon Together - Secondary Photos */}
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="group">
+              <div className="overflow-hidden rounded-lg border-2 border-primary/30 hover:border-primary transition-all">
+                <img 
+                  src={heroPhoto} 
+                  alt="Me and Shannon – why I'm building this" 
+                  className="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-2">Me & Shannon — Our journey</p>
+            </div>
+            <div className="group">
+              <div className="overflow-hidden rounded-lg border-2 border-primary/30 hover:border-primary transition-all">
+                <img 
+                  src={meAndShay2} 
+                  alt="Every practice, every dream" 
+                  className="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-2">Every practice matters</p>
+            </div>
+            <div className="group">
+              <div className="overflow-hidden rounded-lg border-2 border-primary/30 hover:border-primary transition-all">
+                <img 
+                  src={meAndShay4} 
+                  alt="Building for the next generation" 
+                  className="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-2">Building her future</p>
             </div>
           </div>
 
@@ -129,24 +151,31 @@ export function Landing() {
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
           <h2 className="text-4xl font-bold text-center mb-4">It's Already Real</h2>
-          <p className="text-center text-xl text-primary font-semibold mb-8">
+          <p className="text-center text-xl text-primary font-semibold mb-12">
             Real-time swing & pitch analysis
           </p>
           
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div>
-              <img 
-                src={bioScreenshot1} 
-                alt="Biomechanics dashboard with video analysis" 
-                className="w-full rounded-lg border-2 border-primary shadow-neon"
-              />
+          {/* Product Screenshots - Even sizing with glow */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            <div className="group">
+              <div className="overflow-hidden rounded-xl border-3 border-primary shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:shadow-[0_0_30px_rgba(57,255,20,0.6)] transition-all">
+                <img 
+                  src={bioScreenshot1} 
+                  alt="SoftballProAI — Live Biomechanics Demo" 
+                  className="w-full h-80 object-cover object-top group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-3">Live biomechanics dashboard</p>
             </div>
-            <div>
-              <img 
-                src={bioScreenshot2} 
-                alt="Real-time metrics: arm slot, knee flexion, injury flags" 
-                className="w-full rounded-lg border-2 border-primary shadow-neon"
-              />
+            <div className="group">
+              <div className="overflow-hidden rounded-xl border-3 border-primary shadow-[0_0_20px_rgba(57,255,20,0.4)] hover:shadow-[0_0_30px_rgba(57,255,20,0.6)] transition-all">
+                <img 
+                  src={bioScreenshot2} 
+                  alt="Real-time metrics: arm slot, knee flexion, injury flags" 
+                  className="w-full h-80 object-cover object-top group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-3">Real-time analysis & metrics</p>
             </div>
           </div>
 
