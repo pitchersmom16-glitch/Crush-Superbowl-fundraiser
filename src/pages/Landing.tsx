@@ -105,37 +105,17 @@ export function Landing() {
             </div>
           </div>
 
-          {/* Shannon Hitting - Flows with other photos */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {/* Shannon Hitting */}
+          <div className="max-w-4xl mx-auto">
             <div className="group">
               <div className="overflow-hidden rounded-xl border-3 border-primary/50 hover:border-primary transition-all shadow-lg">
                 <img 
                   src={shannonHitting} 
                   alt="Shannon hitting" 
-                  className="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform"
+                  className="w-full h-96 object-cover object-center group-hover:scale-105 transition-transform"
                 />
               </div>
               <p className="text-center text-base text-muted-foreground mt-4 font-medium">Shannon at the Plate</p>
-            </div>
-            <div className="group">
-              <div className="overflow-hidden rounded-xl border-3 border-primary/50 hover:border-primary transition-all shadow-lg">
-                <img 
-                  src={softballMoms} 
-                  alt="Softball moms community" 
-                  className="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform"
-                />
-              </div>
-              <p className="text-center text-base text-muted-foreground mt-4 font-medium">For Parents & Coaches</p>
-            </div>
-            <div className="group">
-              <div className="overflow-hidden rounded-xl border-3 border-primary/50 hover:border-primary transition-all shadow-lg">
-                <img 
-                  src={techPhoto} 
-                  alt="SoftballProAI technology" 
-                  className="w-full h-80 object-cover object-center group-hover:scale-105 transition-transform"
-                />
-              </div>
-              <p className="text-center text-base text-muted-foreground mt-4 font-medium">Advanced Technology</p>
             </div>
           </div>
         </div>
