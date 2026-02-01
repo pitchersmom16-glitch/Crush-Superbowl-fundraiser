@@ -2,6 +2,9 @@ import { Trophy, DollarSign, Target, Users, Shield, HelpCircle } from 'lucide-re
 import logo from '../../softballproai-brand/client/src/assets/logo.jpg';
 import { DonationTiers } from '../components/DonationTiers';
 import { BadgeWall } from '../components/BadgeWall';
+import meAndShay from '../Images/Me and Shay.jpg';
+import softballImage from '../Images/SoftballImage 1.jfif';
+import heroImage from '../Images/hero.jpg';
 
 export function Landing() {
 
@@ -58,10 +61,20 @@ export function Landing() {
               </ul>
             </div>
 
-            {/* TODO: Add product screenshots here */}
-            <div className="bg-muted/20 border border-border rounded-lg p-4 mb-6 text-center text-sm text-muted-foreground">
-              <p>📸 Product screenshots coming soon:</p>
-              <p>Biomechanics dashboard • Player mode analysis • Landing page hero</p>
+            {/* Product Screenshots */}
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
+              <div className="border-2 border-primary/30 rounded-lg overflow-hidden">
+                <img src={heroImage} alt="SoftballProAI Hero - AI-powered coaching platform" className="w-full h-auto" />
+                <p className="text-xs text-center text-muted-foreground p-2">Platform Hero</p>
+              </div>
+              <div className="border-2 border-primary/30 rounded-lg overflow-hidden">
+                <img src={softballImage} alt="Real-time biomechanics analysis dashboard" className="w-full h-auto object-cover" />
+                <p className="text-xs text-center text-muted-foreground p-2">Biomechanics Analysis</p>
+              </div>
+              <div className="border-2 border-primary/30 rounded-lg overflow-hidden">
+                <img src={meAndShay} alt="Kimberly and Shannon - The reason behind SoftballProAI" className="w-full h-auto object-cover" />
+                <p className="text-xs text-center text-muted-foreground p-2">Me & Shannon</p>
+              </div>
             </div>
 
             <div className="bg-accent/10 border border-accent rounded-lg p-6">
