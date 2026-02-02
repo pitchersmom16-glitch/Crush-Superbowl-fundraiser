@@ -3,18 +3,35 @@ import { createClient } from '@supabase/supabase-js';
 const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL || '';
 const supabaseKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || '';
 
-const supabase = supabaseUrl && supabaseKey 
-  ? createClient(supabaseUrl, supabaseKey)
-  : null;
+console.info('SUPABASE CONFIG AT STARTUP:', {
+  hasSupabaseUrl: Boolean(supabaseUrl),
+  supabaseUrlLength: supabaseUrl?.length || 0,
+  hasSupabaseKey: Boolean(supabaseKey),
+  supabaseKeyLength: supabaseKey?.length || 0,
+  supabaseUrlValue: supabaseUrl ? `${supabaseUrl.substring(0, 20)}...` : 'MISSING'
+});
+
+let supabase = null;
+try {
+  if (supabaseUrl && supabaseKey) {
+    supabase = createClient(supabaseUrl, supabaseKey);
+    console.info('Supabase client created successfully');
+  } else {
+    console.error('Supabase config incomplete', { hasUrl: Boolean(supabaseUrl), hasKey: Boolean(supabaseKey) });
+  }
+} catch (initError) {
+  console.error('Supabase initialization error:', initError);
+}
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  try {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+    if (req.method === 'OPTIONS') {
+      return res.status(200).end();
+    }
 
   if (req.method === 'GET') {
     try {
@@ -165,4 +182,11 @@ export default async function handler(req, res) {
   }
 
   return res.status(405).json({ error: 'Method not allowed' });
+  } catch (topLevelError) {
+    console.error('FOUNDING MEMBERS TOP LEVEL ERROR:', topLevelError);
+    return res.status(500).json({ 
+      error: topLevelError?.message || 'Internal server error',
+      stack: process.env.NODE_ENV === 'development' ? topLevelError?.stack : undefined
+    });
+  }
 }
