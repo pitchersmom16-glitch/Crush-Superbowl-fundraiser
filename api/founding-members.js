@@ -53,17 +53,35 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     try {
+      console.info('FOUNDING MEMBERS POST: start', {
+        hasSupabaseUrl: Boolean(supabaseUrl),
+        hasSupabaseKey: Boolean(supabaseKey),
+        bodyType: typeof req.body,
+        bodyExists: Boolean(req.body)
+      });
+
       if (!supabase) {
         return res.status(500).json({ error: 'Database not configured' });
       }
 
-      const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {});
-      const parsedBody = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+      let parsedBody;
+      try {
+        if (typeof req.body === 'string') {
+          parsedBody = JSON.parse(req.body);
+        } else if (req.body && typeof req.body === 'object') {
+          parsedBody = req.body;
+        } else {
+          return res.status(400).json({ error: 'Invalid request body' });
+        }
+      } catch (parseErr) {
+        console.error('FOUNDING MEMBERS POST: JSON parse error', parseErr);
+        return res.status(400).json({ error: `Invalid JSON: ${parseErr.message}` });
+      }
+
       const { name, tier, email, badge_number } = parsedBody;
 
       console.info('FOUNDING MEMBERS POST: request', {
         body: parsedBody,
-        rawBody,
         hasSupabaseUrl: Boolean(supabaseUrl),
         hasSupabaseKey: Boolean(supabaseKey)
       });
