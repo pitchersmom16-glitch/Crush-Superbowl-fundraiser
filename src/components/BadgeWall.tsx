@@ -63,17 +63,19 @@ export function BadgeWall() {
     );
   }
 
+  const claimedCount = members.filter(m => m !== null).length;
+
   return (
     <>
       <div id="badge-wall" className="mb-12">
         <h2 className="text-4xl font-bold text-center mb-4">Founding Member Wall</h2>
         <p className="text-center text-muted-foreground mb-2">
-          {members.length} of {totalBadges} badges claimed
+          {claimedCount} of {totalBadges} badges claimed
         </p>
         <div className="w-full bg-muted rounded-full h-4 mb-8">
           <div 
             className="bg-primary h-4 rounded-full transition-all duration-500"
-            style={{ width: `${(members.length / totalBadges) * 100}%` }}
+            style={{ width: `${(claimedCount / totalBadges) * 100}%` }}
           />
         </div>
 
