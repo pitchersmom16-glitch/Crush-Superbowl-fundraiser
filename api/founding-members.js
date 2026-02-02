@@ -22,6 +22,11 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Database not configured' });
       }
 
+      console.info('FOUNDING MEMBERS GET: start', {
+        hasSupabaseUrl: Boolean(supabaseUrl),
+        hasSupabaseKey: Boolean(supabaseKey)
+      });
+
       const { data, error } = await supabase
         .from('founding_members')
         .select('*')
@@ -41,8 +46,8 @@ export default async function handler(req, res) {
 
       return res.status(200).json(members);
     } catch (error) {
-      console.error('Error fetching founding members:', error);
-      return res.status(500).json({ error: 'Failed to fetch founding members' });
+      console.error('FOUNDING MEMBERS GET ERROR:', error);
+      return res.status(500).json({ error: error?.message || 'Failed to fetch founding members' });
     }
   }
 
@@ -52,7 +57,16 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'Database not configured' });
       }
 
-      const { name, tier, email, badge_number } = req.body;
+      const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {});
+      const parsedBody = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : (req.body || {});
+      const { name, tier, email, badge_number } = parsedBody;
+
+      console.info('FOUNDING MEMBERS POST: request', {
+        body: parsedBody,
+        rawBody,
+        hasSupabaseUrl: Boolean(supabaseUrl),
+        hasSupabaseKey: Boolean(supabaseKey)
+      });
 
       if (!name || !name.trim()) {
         return res.status(400).json({ error: 'Name is required' });
@@ -90,15 +104,27 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Badge number must be between 1 and 100' });
       }
 
-      const { data: existing } = await supabase
+      const { data: existing, error: existingError } = await supabase
         .from('founding_members')
         .select('id')
         .eq('badge_number', assignedBadgeNumber)
         .single();
 
+      if (existingError && existingError.code !== 'PGRST116') {
+        console.error('FOUNDING MEMBERS POST: lookup error', existingError);
+        throw existingError;
+      }
+
       if (existing) {
         return res.status(409).json({ error: 'This badge has already been claimed' });
       }
+
+      console.info('FOUNDING MEMBERS POST: inserting', {
+        name: name?.trim(),
+        tier,
+        email: email?.trim() || null,
+        badge_number: assignedBadgeNumber
+      });
 
       const { data, error } = await supabase
         .from('founding_members')
@@ -113,10 +139,10 @@ export default async function handler(req, res) {
 
       if (error) throw error;
 
-      return res.status(201).json(data);
+      return res.status(201).json({ success: true, member: data });
     } catch (error) {
-      console.error('Error creating founding member:', error);
-      return res.status(500).json({ error: 'Failed to create founding member' });
+      console.error('FOUNDING MEMBER ERROR:', error);
+      return res.status(500).json({ error: error?.message || 'Failed to create founding member' });
     }
   }
 
